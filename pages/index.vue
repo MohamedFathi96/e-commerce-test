@@ -14,8 +14,13 @@
 
     <!-- Products Grid -->
     <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <div  v-for="product in products" :key="product.id" @click="navigateToProductDetails(product)" class="border p-4 rounded-lg shadow cursor-pointer">
-        <img :src="product.image" :alt="product.title" class="w-full h-48 object-cover rounded-t-lg">
+      <div
+        v-for="product in products"
+        :key="product.id"
+        @click="navigateToProductDetails(product)"
+        class="border p-4 rounded-lg shadow cursor-pointer"
+      >
+        <img :src="product.image" :alt="product.title" class="w-full h-48 object-cover rounded-t-lg" />
         <h2 class="text-xl font-semibold mt-4">{{ product.title }}</h2>
         <p class="text-gray-600">{{ product.description }}</p>
         <p class="text-lg font-bold mt-2">${{ product.price }}</p>
@@ -25,15 +30,26 @@
 </template>
 
 <script setup lang="ts">
-import type { Product } from '~/types/global.type';
+import type { Product } from "~/types/global.type";
+
+definePageMeta({
+  auth: {
+    unauthenticatedOnly: false,
+    navigateUnauthenticatedTo: "/login",
+  },
+});
 
 const router = useRouter();
 
-const { data: products, status, error } = useAsyncData<Product[]>('fetchProducts', () => $fetch('https://fakestoreapi.com/products'));
+const {
+  data: products,
+  status,
+  error,
+} = useAsyncData<Product[]>("fetchProducts", () => $fetch("https://fakestoreapi.com/products"));
 
 const navigateToProductDetails = (product: Product) => {
-    router.push(`/products/${product.id}`)
-}
+  router.push(`/products/${product.id}`);
+};
 </script>
 
 <style scoped>

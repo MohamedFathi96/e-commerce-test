@@ -4,16 +4,17 @@ export default defineNuxtConfig({
   modules: ["@sidebase/nuxt-auth"],
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
+  auth: {
+    baseURL: "/api/auth",
+    globalAppMiddleware: true,
+    provider: {
+      type: "authjs",
+    },
+  },
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
-    },
-  },
-  auth: {
-    baseURL: process.env.NEXTAUTH_URL,
-    provider: {
-      type: "authjs",
     },
   },
   runtimeConfig: {

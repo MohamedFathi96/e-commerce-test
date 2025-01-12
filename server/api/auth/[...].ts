@@ -1,4 +1,3 @@
-// file: ~/server/api/auth/[...].ts
 import { NuxtAuthHandler } from "#auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
@@ -16,7 +15,7 @@ export default NuxtAuthHandler({
       async authorize(credentials: any) {
         const { email, password } = credentials!;
         try {
-          const user = { email: "test@test.com", password: "123123" };
+          const user = { id: 12, email: "test@test.com", password: "123123" };
           // Return null if user data could not be retrieved
           if (!user)
             throw createError({

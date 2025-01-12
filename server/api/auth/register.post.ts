@@ -7,8 +7,8 @@ const users = new Map();
 export default defineEventHandler(async (event) => {
   try {
     const body = (await readBody(event)) as User;
-
-    if (!body.name || !body.email || !body.password) {
+    console.log(body);
+    if (!body.email || !body.password) {
       throw createError({
         statusCode: 400,
         statusMessage: "Invalid input: Name, email, and password are required.",
